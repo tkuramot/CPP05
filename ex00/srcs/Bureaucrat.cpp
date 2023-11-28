@@ -15,6 +15,7 @@
 //
 
 #include "Bureaucrat.hpp"
+#include <iostream>
 
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
   return "Bureaucrat grade must be lower than or equal to 1";
@@ -77,4 +78,10 @@ void Bureaucrat::Demote(int grade_diff) {
 	throw GradeTooLowException();
   }
   grade_ = grade_diff;
+}
+
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat)
+{
+  os << bureaucrat.GetName() << " , bureaucrat grade " << bureaucrat.GetGrade();
+  return os;
 }

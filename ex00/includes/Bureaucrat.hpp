@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:40:59 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/11/29 00:43:08 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/11/29 00:48:41 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ class Bureaucrat {
   static const int kHighestGrade = 1;
   static const int kLowestGrade = 150;
 };
+
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
 
 #endif //A_OUT_EX00_BUREAUCRAT_HPP_
