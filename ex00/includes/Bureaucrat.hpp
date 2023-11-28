@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:40:59 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/11/29 00:16:48 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/11/29 00:43:08 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,25 @@
 
 class Bureaucrat {
  public:
+  class GradeTooHighException : public std::exception {
+	virtual const char *what() const throw();
+  };
+  class GradeTooLowException : public std::exception {
+	virtual const char *what() const throw();
+  };
   Bureaucrat(const std::string &name, int grade);
   Bureaucrat(const Bureaucrat &obj);
   ~Bureaucrat();
+  Bureaucrat &operator=(const Bureaucrat &obj);
   const std::string &GetName() const;
   int GetGrade() const;
-  void Promote(int grade);
-  void Demote(int grade);
+  void Promote(int grade_diff);
+  void Demote(int grade_diff);
  private:
   const std::string kName;
   int grade_;
+  static const int kHighestGrade = 1;
+  static const int kLowestGrade = 150;
 };
 
 #endif //A_OUT_EX00_BUREAUCRAT_HPP_
