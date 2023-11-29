@@ -28,10 +28,9 @@ const char *Bureaucrat::GradeTooLowException::what() const throw() {
 Bureaucrat::Bureaucrat(const std::string &name,
 					   int grade) throw(Bureaucrat::GradeTooHighException, Bureaucrat::GradeTooLowException)
 	: kName(name) {
-  if (grade_ < kHighestGrade) {
+  if (grade < kHighestGrade) {
 	throw GradeTooHighException();
-  }
-  if (grade_ > kLowestGrade) {
+  } else if (grade > kLowestGrade) {
 	throw GradeTooLowException();
   }
   grade_ = grade;
@@ -61,14 +60,14 @@ void Bureaucrat::Promote(int grade_diff) throw(Bureaucrat::GradeTooHighException
   if (grade_ - grade_diff < kHighestGrade) {
 	throw GradeTooHighException();
   }
-  grade_ = grade_diff;
+  grade_ -= grade_diff;
 }
 
 void Bureaucrat::Demote(int grade_diff) throw(Bureaucrat::GradeTooLowException) {
   if (grade_ + grade_diff > kLowestGrade) {
 	throw GradeTooLowException();
   }
-  grade_ = grade_diff;
+  grade_ += grade_diff;
 }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {

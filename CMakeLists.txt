@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 project(GTest_CPP_Module05 CXX)
 
-set(CMAKE_CXX_STANDARD 98)
+set(CMAKE_CXX_STANDARD 17)
 find_package(GTest REQUIRED)
 enable_testing()
 

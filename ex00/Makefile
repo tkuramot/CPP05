@@ -1,10 +1,10 @@
 CXX      := c++
 CXXFLAGS := -g -MMD -MP -Wall -Wextra -Werror -std=c++98
 DFLAGS   := -fsanitize=address -fsanitize=bounds
-INCLUDE  := -I include
+INCLUDE  := -I includes
 NAME     := a.out
 SRCDIR   := srcs
-SRCS     := srcs/main.cpp
+SRCS     := srcs/main.cpp srcs/Bureaucrat.cpp
 OBJDIR   := objs
 OBJS     := $(subst $(SRCDIR), $(OBJDIR), $(SRCS:.cpp=.o))
 DEPENDS  := $(OBJS:.o=.d)

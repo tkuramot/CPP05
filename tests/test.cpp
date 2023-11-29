@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:16:08 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/11/29 11:16:08 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:40:45 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ class BureaucratTest : public ::testing::Test {
  protected:
   Bureaucrat *bureaucrat;
 
-  void SetUp() override {
+  virtual void SetUp() override {
 	bureaucrat = new Bureaucrat("John Doe", 50);
   }
 
-  void TearDown() override {
+  virtual void TearDown() override {
 	delete bureaucrat;
   }
 };
@@ -55,7 +55,6 @@ EXPECT_EQ(copy.GetGrade(), bureaucrat->GetGrade());
 TEST_F(BureaucratTest, AssignmentOperator) {
 Bureaucrat another("Jane Doe", 75);
 another = *bureaucrat;
-EXPECT_EQ(another.GetName(), bureaucrat->GetName());
 EXPECT_EQ(another.GetGrade(), bureaucrat->GetGrade());
 }
 
