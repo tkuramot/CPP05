@@ -1,27 +1,40 @@
 cmake_minimum_required(VERSION 3.26)
-project(GTest_CPP_Module05 CXX)
+project(cpp-module CXX)
 
-set(CMAKE_CXX_STANDARD 17)
-find_package(GTest REQUIRED)
+set(PROGRAM cpp-module)
+
+# Google Testの不要なキャッシュ変数をオフにしておく
+option(BUILD_GMOCK "Builds the googlemock subprojects" OFF)
+option(INSTALL_GTEST "Enables installation of googletest" OFF)
+
 enable_testing()
+
+# Google Testをこのプロジェクトに組み込む
+add_subdirectory(${PROJECT_SOURCE_DIR}/third-party/googletest)
+
+# main.cppを除いてソースファイルを追加
+file(GLOB_RECURSE SOURCES "${PROJECT_SOURCE_DIR}/*/srcs/*.cpp")
+list(FILTER SOURCES EXCLUDE REGEX ".*/main\\.cpp$")
+# テストのソースファイルを追加
+file(GLOB TEST_SOURCES "${PROJECT_SOURCE_DIR}/tests/*.cpp")
+
+add_executable(${PROGRAM} ${TEST_SOURCES} ${SOURCES})
 
 # includesディレクトリを追加
 file(GLOB INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/*/includes")
-include_directories(${INCLUDE_DIRS})
-
-# main.cppを除いてソースファイルを追加
-file(GLOB_RECURSE SOURCE_FILES "${PROJECT_SOURCE_DIR}/*/srcs/*.cpp")
-list(FILTER SOURCE_FILES EXCLUDE REGEX ".*/main\\.cpp$")
-
-add_executable(cpp_test ${PROJECT_SOURCE_DIR}/tests/test.cpp ${SOURCE_FILES})
-target_link_libraries(cpp_test
+target_include_directories(${PROGRAM}
         PRIVATE
-        $<IF:$<VERSION_GREATER_EQUAL:${CMAKE_VERSION},3.20>,
-        GTest::gtest GTest::gtest_main,
-        GTest::GTest GTest::Main
-        >
+        ${INCLUDE_DIRS}
 )
 
-# GTestに単体テストを追加
-include(GoogleTest)
-gtest_discover_tests(cpp_test)
+# Google Testをリンク
+target_link_libraries(${PROGRAM}
+        PRIVATE
+        gtest_main
+)
+target_include_directories(${PROGRAM}
+        PUBLIC
+        include
+        third-party/googletest/googletest/include
+        third-party/googletest/googlemock/include
+)
