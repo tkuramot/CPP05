@@ -1,6 +1,7 @@
-CMakeLists.txt
 cmake-build-debug
 .idea
+build
+cpp_test
 *.o
 *.d
 a.out
