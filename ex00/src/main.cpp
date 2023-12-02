@@ -21,5 +21,7 @@ int main() {
   Bureaucrat b("Bob", 50);
   b.Demote(100);
   std::cout << b << std::endl;
+  std::cout << "\033[31mThis text is red\033[0m\n";
+  std::cout << "\033[32mThis text is green\033[0m\n";
   return 0;
 }
