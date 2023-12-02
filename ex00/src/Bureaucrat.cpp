@@ -69,6 +69,6 @@ void Bureaucrat::Demote(int grade_diff) throw(Bureaucrat::GradeTooLowException) 
 }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
-  os << bureaucrat.GetName() << " , bureaucrat grade " << bureaucrat.GetGrade();
+  os << bureaucrat.GetName() << ", bureaucrat grade " << bureaucrat.GetGrade();
   return os;
 }
