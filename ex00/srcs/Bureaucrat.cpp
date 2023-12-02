@@ -27,13 +27,12 @@ const char *Bureaucrat::GradeTooLowException::what() const throw() {
 
 Bureaucrat::Bureaucrat(const std::string &name,
 					   int grade) throw(Bureaucrat::GradeTooHighException, Bureaucrat::GradeTooLowException)
-	: kName(name) {
-  if (grade < kHighestGrade) {
+	: kName(name), grade_(grade) {
+  if (grade_ < kHighestGrade) {
 	throw GradeTooHighException();
-  } else if (grade > kLowestGrade) {
+  } else if (grade_ > kLowestGrade) {
 	throw GradeTooLowException();
   }
-  grade_ = grade;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &obj) : kName(obj.kName), grade_(obj.grade_) {

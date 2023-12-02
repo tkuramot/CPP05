@@ -48,3 +48,15 @@ Form &Form::operator=(const Form &obj) {
   is_signed_ = obj.is_signed_;
   return *this;
 }
+const std::string &Form::GetName() const {
+  return kName;
+}
+bool Form::IsSigned() const {
+  return is_signed_;
+}
+const int Form::GetRequiredGradeToSign() const {
+  return kRequiredGradeToSign;
+}
+const int Form::GetRequiredGradeToExecute() const {
+  return kRequiredGradeToExecute;
+}
