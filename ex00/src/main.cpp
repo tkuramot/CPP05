@@ -30,7 +30,7 @@ int main() {
 	  try {
 		Bureaucrat b("Bob", 0);
 	  } catch (Bureaucrat::GradeTooHighException &e) {
-		std::cout << "Grade too high exceptions was thrown" << std::endl;
+		std::cout << e.what() << std::endl;
 	  }
 	}
 	{
@@ -38,7 +38,7 @@ int main() {
 	  try {
 		Bureaucrat b("Bob", 151);
 	  } catch (Bureaucrat::GradeTooLowException &e) {
-		std::cout << "Grade too low exceptions was thrown" << std::endl;
+		std::cout << e.what() << std::endl;
 	  }
 	}
   }
@@ -84,7 +84,7 @@ int main() {
 		std::cout << "Bureaucrat promoted by 50 grade" << std::endl;
 		b.Promote(50);
 	  } catch (Bureaucrat::GradeTooHighException &e) {
-		std::cout << "Grade too high exceptions was thrown" << std::endl;
+		std::cout << e.what() << std::endl;
 	  }
 	}
 	{
@@ -95,7 +95,7 @@ int main() {
 		std::cout << "Bureaucrat promoted by 101 grade" << std::endl;
 		b.Demote(101);
 	  } catch (Bureaucrat::GradeTooLowException &e) {
-		std::cout << "Grade too low exceptions was thrown" << std::endl;
+		std::cout << e.what() << std::endl;
 	  }
 	}
   }
