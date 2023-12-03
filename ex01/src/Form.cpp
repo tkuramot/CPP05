@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:05:04 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/11/30 17:12:36 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/12/03 23:10:00 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 // Created by k.t. on 2023/11/30.
 //
 
+#include "Bureaucrat.hpp"
 #include "Form.hpp"
 
 const char *Form::GradeTooHighException::what() const throw() {
@@ -27,11 +28,17 @@ const char *Form::GradeTooLowException::what() const throw() {
 Form::Form(const std::string &name,
 		   bool is_signed,
 		   const int required_grade_to_sign,
-		   const int required_grade_to_execute)
+		   const int required_grade_to_execute) throw(Form::GradeTooHighException, Form::GradeTooLowException)
 	: kName(name),
 	  is_signed_(is_signed),
 	  kRequiredGradeToSign(required_grade_to_sign),
 	  kRequiredGradeToExecute(required_grade_to_execute) {
+  if (kRequiredGradeToSign < Bureaucrat::kHighestGrade || kRequiredGradeToExecute < Bureaucrat::kHighestGrade) {
+	throw Form::GradeTooHighException();
+  }
+  if (kRequiredGradeToSign > Bureaucrat::kLowestGrade || kRequiredGradeToExecute > Bureaucrat::kLowestGrade) {
+	throw Form::GradeTooLowException();
+  }
 }
 
 Form::Form(const Form &obj)
@@ -54,9 +61,25 @@ const std::string &Form::GetName() const {
 bool Form::IsSigned() const {
   return is_signed_;
 }
-const int Form::GetRequiredGradeToSign() const {
+
+const int Form::GetRequiredGradeToSign() const throw(Form::GradeTooHighException, Form::GradeTooLowException) {
   return kRequiredGradeToSign;
 }
-const int Form::GetRequiredGradeToExecute() const {
+
+const int Form::GetRequiredGradeToExecute() const throw(Form::GradeTooHighException, Form::GradeTooLowException) {
   return kRequiredGradeToExecute;
+}
+
+void Form::BeSigned(const Bureaucrat &bureaucrat) throw(Form::GradeTooLowException) {
+  if (bureaucrat.GetGrade() > kRequiredGradeToSign) {
+	throw Form::GradeTooLowException();
+  }
+  is_signed_ = true;
+}
+
+std::ostream &operator<<(std::ostream &os, Form &form) {
+  os << "Form title is " << form.GetName() << " which requires grade " << form.GetRequiredGradeToSign()
+	 << " to sign and grade " << form.GetRequiredGradeToExecute() << " to execute. This form is "
+	 << (form.IsSigned() ? "signed." : "not signed.");
+  return os;
 }

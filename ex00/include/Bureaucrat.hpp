@@ -27,10 +27,12 @@ class Bureaucrat {
   class GradeTooLowException : public std::exception {
 	virtual const char *what() const throw();
   };
+
   Bureaucrat(const std::string &name, int grade) throw(GradeTooHighException, GradeTooLowException);
   Bureaucrat(const Bureaucrat &obj);
   ~Bureaucrat();
   Bureaucrat &operator=(const Bureaucrat &obj);
+
   const std::string &GetName() const;
   int GetGrade() const;
   void Promote(int grade_diff) throw(GradeTooHighException);

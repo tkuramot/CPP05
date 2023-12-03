@@ -15,6 +15,7 @@
 //
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
@@ -68,7 +69,21 @@ void Bureaucrat::Demote(int grade_diff) throw(Bureaucrat::GradeTooLowException) 
   grade_ += grade_diff;
 }
 
+void Bureaucrat::SignForm(Form &form) const {
+  if (form.IsSigned()) {
+	std::cout << kName << " couldn’t sign " << form.GetName() << " because the form is already signed." << std::endl;
+	return;
+  }
+  try {
+	form.BeSigned(*this);
+  } catch (Form::GradeTooLowException &e) {
+	std::cout << kName << " couldn’t sign " << form.GetName() << " because his grade is too low." << std::endl;
+	return;
+  }
+  std::cout << kName << " signed " << form.GetName() << "." << std::endl;
+}
+
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
-  os << bureaucrat.GetName() << ", bureaucrat grade " << bureaucrat.GetGrade();
+  os << bureaucrat.GetName() << ", bureaucrat grade " << bureaucrat.GetGrade() << ".";
   return os;
 }

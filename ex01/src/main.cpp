@@ -15,10 +15,12 @@
 //
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 int main() {
   {
+	std::cout << "==================Bureaucrat==================" << std::endl;
 	std::cout << "==================Constructor==================" << std::endl;
 	{
 	  std::cout << "------------------Normal------------------" << std::endl;
@@ -64,7 +66,7 @@ int main() {
 	std::cout << b.GetGrade() << std::endl;
   }
   {
-	std::cout << "==================Accessors==================" << std::endl;
+	std::cout << "==================Promote & Demote==================" << std::endl;
 	{
 	  std::cout << "------------------Normal------------------" << std::endl;
 	  Bureaucrat b("Bob", 50);
@@ -97,6 +99,89 @@ int main() {
 	  } catch (Bureaucrat::GradeTooLowException &e) {
 		std::cout << "Grade too low exceptions was thrown" << std::endl;
 	  }
+	}
+	{
+	  std::cout << "==================SignForm==================" << std::endl;
+	  {
+		std::cout << "------------------Normal------------------" << std::endl;
+		Form f("Construction plan", false, 20, 40);
+		Bureaucrat b("Bob", 10);
+		b.SignForm(f);
+	  }
+	  {
+		std::cout << "------------------Already signed------------------" << std::endl;
+		Form f("Construction plan", false, 20, 40);
+		Bureaucrat b("Bob", 10);
+		b.SignForm(f);
+		b.SignForm(f);
+	  }
+	  {
+		std::cout << "------------------Too low grade------------------" << std::endl;
+		Form f("Construction plan", false, 20, 40);
+		Bureaucrat b("Bob", 50);
+		try {
+		  b.SignForm(f);
+		} catch (Form::GradeTooLowException &e) {
+		  std::cout << "Grade too low exceptions was thrown" << std::endl;
+		}
+	  }
+	}
+  }
+  {
+	std::cout << "==================Form==================" << std::endl;
+	std::cout << "==================Constructor==================" << std::endl;
+	{
+	  std::cout << "------------------Normal------------------" << std::endl;
+	  Form f("Construction plan", false, 20, 40);
+	  std::cout << f << std::endl;
+	}
+	{
+	  std::cout << "------------------Too high grade------------------" << std::endl;
+	  try {
+		Form f("Construction plan", false, 0, 40);
+	  } catch (Form::GradeTooHighException &e) {
+		std::cout << "Grade too high exceptions was thrown" << std::endl;
+	  }
+	  try {
+		Form f("Construction plan", false, 20, 0);
+	  } catch (Form::GradeTooHighException &e) {
+		std::cout << "Grade too high exceptions was thrown" << std::endl;
+	  }
+	}
+	{
+	  std::cout << "------------------Too low grade------------------" << std::endl;
+	  try {
+		Form f("Construction plan", false, 151, 40);
+	  } catch (Form::GradeTooLowException &e) {
+		std::cout << "Grade too low exceptions was thrown" << std::endl;
+	  }
+	  try {
+		Form f("Construction plan", false, 20, 151);
+	  } catch (Form::GradeTooLowException &e) {
+		std::cout << "Grade too low exceptions was thrown" << std::endl;
+	  }
+	}
+	{
+	  std::cout << "==================Copy Constructor==================" << std::endl;
+	  Form f("Construction plan", false, 20, 40);
+	  Form b_copy(f);
+	  std::cout << f << std::endl;
+	  std::cout << b_copy << std::endl;
+	}
+	{
+	  std::cout << "==================Copy Assignment Operator==================" << std::endl;
+	  Form f("Construction plan", false, 20, 40);
+	  Form f_assigned("No plan", false, 20, 40);
+	  f_assigned = f;
+	  std::cout << f << std::endl;
+	  std::cout << f_assigned << std::endl;
+	}
+	{
+	  std::cout << "==================Accessors==================" << std::endl;
+	  Form f("Construction plan", false, 20, 40);
+	  std::cout << f.GetName() << std::endl;
+	  std::cout << f.GetRequiredGradeToSign() << std::endl;
+	  std::cout << f.GetRequiredGradeToExecute() << std::endl;
 	}
   }
   return 0;

@@ -5,6 +5,6 @@ set(CMAKE_CXX_STANDARD 98)
 
 include_directories(./include)
 
-AUX_SOURCE_DIRECTORY(./src src)
+AUX_SOURCE_DIRECTORY(./src SRCS)
 
 add_executable(a.out ${SRCS})
