@@ -19,7 +19,7 @@
 
 #include <string>
 
-class AForm;
+class Form;
 
 class Bureaucrat {
  public:
@@ -41,6 +41,7 @@ class Bureaucrat {
   int GetGrade() const;
   void Promote(int grade_diff) throw(GradeTooHighException);
   void Demote(int grade_diff) throw(GradeTooLowException);
+
   void SignForm(Form &form) const;
 
   static const int kHighestGrade = 1;

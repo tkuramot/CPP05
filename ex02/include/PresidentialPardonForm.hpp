@@ -1,0 +1,12 @@
+//
+// Created by k.t. on 2023/12/04.
+//
+
+#ifndef A_OUT_EX02_PRESIDENTIALPARDONFORM_HPP_
+#define A_OUT_EX02_PRESIDENTIALPARDONFORM_HPP_
+
+class PresidentialPardonForm {
+
+};
+
+#endif //A_OUT_EX02_PRESIDENTIALPARDONFORM_HPP_

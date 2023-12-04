@@ -21,7 +21,7 @@
 
 class Bureaucrat;
 
-class AForm {
+class Form {
  public:
   class GradeTooHighException : public std::exception {
    public:
@@ -31,23 +31,26 @@ class AForm {
    public:
 	virtual const char *what() const throw();
   };
-  AForm(const std::string &name,
+
+  Form(const std::string &name,
 		bool is_signed,
 		const int required_grade_to_sign,
 		const int required_grade_to_execute) throw(GradeTooHighException, GradeTooLowException);
-  AForm(const Form &obj);
-  ~AForm();
+  Form(const Form &obj);
+  ~Form();
   Form &operator=(const Form &obj);
+
   const std::string &GetName() const;
   bool IsSigned() const;
-  const int GetRequiredGradeToSign() const throw(GradeTooHighException, GradeTooLowException);
-  const int GetRequiredGradeToExecute() const throw(GradeTooHighException, GradeTooLowException);
-  void BeSigned(const Bureaucrat &bureaucrat) throw(Form::GradeTooLowException);
+  int GetRequiredGradeToSign() const throw(GradeTooHighException, GradeTooLowException);
+  int GetRequiredGradeToExecute() const throw(GradeTooHighException, GradeTooLowException);
+
+  void BeSigned(Bureaucrat const &bureaucrat) throw(Form::GradeTooLowException);
  private:
   const std::string kName;
   bool is_signed_;
-  static const int kRequiredGradeToSign;
-  static const int kRequiredGradeToExecute;
+  const int kRequiredGradeToSign;
+  const int kRequiredGradeToExecute;
 };
 
 std::ostream &operator<<(std::ostream &os, Form &form);

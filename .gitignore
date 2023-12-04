@@ -3,5 +3,7 @@ cmake-build-debug
 build
 cpp_test
 *.o
+*.debug
 *.d
 a.out
+debug.a.out

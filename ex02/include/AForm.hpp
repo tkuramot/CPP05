@@ -31,18 +31,27 @@ class AForm {
    public:
 	virtual const char *what() const throw();
   };
+  class NotSignedYet : public std::exception {
+   public:
+	virtual const char *what() const throw();
+  };
+
   AForm(const std::string &name,
 		bool is_signed,
 		const int required_grade_to_sign,
 		const int required_grade_to_execute) throw(GradeTooHighException, GradeTooLowException);
   AForm(const AForm &obj);
-  ~AForm();
+  virtual ~AForm();
   AForm &operator=(const AForm &obj);
+
   const std::string &GetName() const;
   bool IsSigned() const;
-  const int GetRequiredGradeToSign() const throw(GradeTooHighException, GradeTooLowException);
-  const int GetRequiredGradeToExecute() const throw(GradeTooHighException, GradeTooLowException);
-  void BeSigned(const Bureaucrat &bureaucrat) throw(AForm::GradeTooLowException);
+  int GetRequiredGradeToSign() const throw(GradeTooHighException, GradeTooLowException);
+  int GetRequiredGradeToExecute() const throw(GradeTooHighException, GradeTooLowException);
+
+  void BeSigned(Bureaucrat const &bureaucrat) throw(AForm::GradeTooLowException);
+  void IsExecutable(Bureaucrat const &executor) const throw(AForm::GradeTooLowException, AForm::NotSignedYet);
+  virtual void Execute(Bureaucrat const &executor) const throw(AForm::GradeTooLowException, AForm::NotSignedYet) = 0;
  private:
   const std::string kName;
   bool is_signed_;

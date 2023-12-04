@@ -62,15 +62,15 @@ bool Form::IsSigned() const {
   return is_signed_;
 }
 
-const int Form::GetRequiredGradeToSign() const throw(Form::GradeTooHighException, Form::GradeTooLowException) {
+int Form::GetRequiredGradeToSign() const throw(Form::GradeTooHighException, Form::GradeTooLowException) {
   return kRequiredGradeToSign;
 }
 
-const int Form::GetRequiredGradeToExecute() const throw(Form::GradeTooHighException, Form::GradeTooLowException) {
+int Form::GetRequiredGradeToExecute() const throw(Form::GradeTooHighException, Form::GradeTooLowException) {
   return kRequiredGradeToExecute;
 }
 
-void Form::BeSigned(const Bureaucrat &bureaucrat) throw(Form::GradeTooLowException) {
+void Form::BeSigned(Bureaucrat const &bureaucrat) throw(Form::GradeTooLowException) {
   if (bureaucrat.GetGrade() > kRequiredGradeToSign) {
 	throw Form::GradeTooLowException();
   }
