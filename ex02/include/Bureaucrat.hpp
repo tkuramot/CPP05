@@ -43,6 +43,7 @@ class Bureaucrat {
   void Demote(int grade_diff) throw(GradeTooLowException);
 
   void SignForm(AForm &form) const;
+  void ExecuteForm(AForm const &form);
 
   static const int kHighestGrade = 1;
   static const int kLowestGrade = 150;

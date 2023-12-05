@@ -83,6 +83,21 @@ void Bureaucrat::SignForm(AForm &form) const {
   std::cout << kName << " signed " << form.GetName() << "." << std::endl;
 }
 
+void Bureaucrat::ExecuteForm(AForm const &form) {
+  try {
+	form.Execute(*this);
+	std::cout << kName << " executed " << form.GetName() << std::endl;
+  } catch (AForm::GradeTooLowException &e) {
+	std::cout << kName << "'s grade was too low to execute " << form.GetName() << "." << std::endl;
+  } catch (AForm::NotSignedYet &e) {
+	std::cout << kName << " tried to execute " << form.GetName() << ", but it was not signed yet."
+			  << std::endl;
+  } catch (std::exception &e) {
+	std::cout << kName << " couldn't execute " << form.GetName() << "." << std::endl
+			  << e.what() << std::endl;
+  }
+}
+
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
   os << bureaucrat.GetName() << ", bureaucrat grade " << bureaucrat.GetGrade() << ".";
   return os;

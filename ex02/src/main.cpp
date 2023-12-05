@@ -19,8 +19,8 @@
 #include <iostream>
 
 int main() {
-  {
-	std::cout << "==================Bureaucrat==================" << std::endl;
+//  {
+//	std::cout << "==================Bureaucrat==================" << std::endl;
 //	std::cout << "==================Constructor==================" << std::endl;
 //	{
 //	  std::cout << "------------------Normal------------------" << std::endl;
@@ -126,9 +126,9 @@ int main() {
 //		}
 //	  }
 //	}
-  }
-  {
-	std::cout << "==================AForm==================" << std::endl;
+//  }
+//  {
+//	std::cout << "==================AForm==================" << std::endl;
 //	std::cout << "==================Constructor==================" << std::endl;
 //	{
 //	  std::cout << "------------------Normal------------------" << std::endl;
@@ -183,9 +183,27 @@ int main() {
 //	  std::cout << f.GetRequiredGradeToSign() << std::endl;
 //	  std::cout << f.GetRequiredGradeToExecute() << std::endl;
 //	}
-	ShrubberyCreationForm f("form", true);
-	f.Execute(Bureaucrat("Bob", 1));
-	std::cout << "hi" << std::endl;
+//  }
+  {
+	std::cout << "==================ShrubberyForm==================" << std::endl;
+	{
+	  std::cout << "------------------Normal------------------" << std::endl;
+	  ShrubberyCreationForm f("Roppongi shrubbery plan", true);
+	  Bureaucrat b("Bob", 1);
+	  b.ExecuteForm(f);
+	}
+	{
+	  std::cout << "------------------Not signed yet------------------" << std::endl;
+	  ShrubberyCreationForm f("Roppongi shrubbery plan", false);
+	  Bureaucrat b("Bob", 1);
+	  b.ExecuteForm(f);
+	}
+	{
+	  std::cout << "------------------Too low level------------------" << std::endl;
+	  ShrubberyCreationForm f("Roppongi shrubbery plan", true);
+	  Bureaucrat b("Bob", 145);
+	  b.ExecuteForm(f);
+	}
   }
   return 0;
 }
