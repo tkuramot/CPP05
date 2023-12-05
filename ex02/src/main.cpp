@@ -15,6 +15,7 @@
 //
 
 #include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include <iostream>
@@ -228,6 +229,30 @@ int main() {
 	{
 	  std::cout << "------------------Too low level------------------" << std::endl;
 	  RobotomyRequestForm f("John");
+	  Bureaucrat b("Bob", 72);
+	  b.SignForm(f);
+	  b.ExecuteForm(f);
+	}
+  }
+  {
+	std::cout << "==================PresidentialPardonForm==================" << std::endl;
+	{
+	  std::cout << "------------------Normal------------------" << std::endl;
+	  PresidentialPardonForm f("John");
+	  std::cout << f << std::endl;
+	  Bureaucrat b("Bob", 1);
+	  b.SignForm(f);
+	  b.ExecuteForm(f);
+	}
+	{
+	  std::cout << "------------------Not signed yet------------------" << std::endl;
+	  PresidentialPardonForm f("John");
+	  Bureaucrat b("Bob", 1);
+	  b.ExecuteForm(f);
+	}
+	{
+	  std::cout << "------------------Too low level------------------" << std::endl;
+	  PresidentialPardonForm f("John");
 	  Bureaucrat b("Bob", 72);
 	  b.SignForm(f);
 	  b.ExecuteForm(f);

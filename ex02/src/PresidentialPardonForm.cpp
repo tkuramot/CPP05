@@ -14,4 +14,27 @@
 // Created by k.t. on 2023/12/04.
 //
 
+#include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
+
+PresidentialPardonForm::PresidentialPardonForm(const std::string target)
+	: AForm("PresidentialPardonForm",
+			false,
+			25,
+			5) {
+  target_ = target;
+}
+
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &obj) : AForm(obj) {}
+
+PresidentialPardonForm::~PresidentialPardonForm() {}
+
+PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &obj) {
+  AForm::operator=(obj);
+}
+
+void PresidentialPardonForm::Execute(const Bureaucrat &bureaucrat) const
+throw(AForm::GradeTooLowException, AForm::NotSignedYet) {
+  AForm::IsExecutable(bureaucrat);
+  std::cout << "Zaphod Beeblebrox pardoned " << target_ << std::endl;
+}
