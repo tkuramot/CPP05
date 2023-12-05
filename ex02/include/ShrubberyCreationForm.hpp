@@ -15,7 +15,8 @@ class ShrubberyCreationForm : public AForm {
   ~ShrubberyCreationForm();
   ShrubberyCreationForm &operator=(const ShrubberyCreationForm &obj);
 
-  void Execute(Bureaucrat const &executor) const throw(AForm::GradeTooLowException, AForm::NotSignedYet);
+  void Execute(Bureaucrat const &executor) const
+  throw(AForm::GradeTooLowException, AForm::NotSignedYet, std::ios_base::failure);
 };
 
 #endif //A_OUT_EX02_SHRUBBERYCREATIONFORM_HPP_

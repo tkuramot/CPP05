@@ -51,7 +51,7 @@ class AForm {
 
   void BeSigned(Bureaucrat const &bureaucrat) throw(AForm::GradeTooLowException);
   void IsExecutable(Bureaucrat const &executor) const throw(AForm::GradeTooLowException, AForm::NotSignedYet);
-  virtual void Execute(Bureaucrat const &executor) const throw(AForm::GradeTooLowException, AForm::NotSignedYet) = 0;
+  virtual void Execute(Bureaucrat const &executor) const throw(std::exception) = 0;
  private:
   const std::string kName;
   bool is_signed_;

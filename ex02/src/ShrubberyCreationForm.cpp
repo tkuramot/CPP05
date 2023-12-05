@@ -34,7 +34,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 }
 
 void ShrubberyCreationForm::Execute(Bureaucrat const &executor) const
-throw(AForm::GradeTooLowException, AForm::NotSignedYet) {
+throw(AForm::GradeTooLowException, AForm::NotSignedYet, std::ios_base::failure) {
   AForm::IsExecutable(executor);
   std::ofstream shrubbery_file(executor.GetName() + "_shrubbery");
   shrubbery_file.exceptions(std::ofstream::badbit | std::ofstream::failbit);

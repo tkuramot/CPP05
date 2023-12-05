@@ -6,6 +6,7 @@ NAME		:= a.out
 NAME_DEBUG	:= debug.a.out
 SRCDIR		:= src
 SRCS		:= \
+	src/RobotomyRequestForm.cpp \
 	src/ShrubberyCreationForm.cpp \
 	src/Bureaucrat.cpp \
 	src/AForm.cpp \
