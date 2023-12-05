@@ -78,7 +78,7 @@ void Form::BeSigned(Bureaucrat const &bureaucrat) throw(Form::GradeTooLowExcepti
 }
 
 std::ostream &operator<<(std::ostream &os, Form &form) {
-  os << "Form title is " << form.GetName() << " which requires grade " << form.GetRequiredGradeToSign()
+  os << "This form, " << form.GetName() << " requires grade " << form.GetRequiredGradeToSign()
 	 << " to sign and grade " << form.GetRequiredGradeToExecute() << " to execute. This form is "
 	 << (form.IsSigned() ? "signed." : "not signed.");
   return os;

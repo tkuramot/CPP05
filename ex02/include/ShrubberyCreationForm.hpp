@@ -9,8 +9,7 @@
 
 class ShrubberyCreationForm : public AForm {
  public:
-  ShrubberyCreationForm(const std::string &name,
-						bool is_signed);
+  ShrubberyCreationForm(const std::string &name);
   ShrubberyCreationForm(const ShrubberyCreationForm &obj);
   ~ShrubberyCreationForm();
   ShrubberyCreationForm &operator=(const ShrubberyCreationForm &obj);

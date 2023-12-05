@@ -189,20 +189,23 @@ int main() {
 	std::cout << "==================ShrubberyForm==================" << std::endl;
 	{
 	  std::cout << "------------------Normal------------------" << std::endl;
-	  ShrubberyCreationForm f("Roppongi shrubbery plan", true);
+	  ShrubberyCreationForm f("home");
+	  std::cout << f << std::endl;
 	  Bureaucrat b("Bob", 1);
+	  b.SignForm(f);
 	  b.ExecuteForm(f);
 	}
 	{
 	  std::cout << "------------------Not signed yet------------------" << std::endl;
-	  ShrubberyCreationForm f("Roppongi shrubbery plan", false);
+	  ShrubberyCreationForm f("home");
 	  Bureaucrat b("Bob", 1);
 	  b.ExecuteForm(f);
 	}
 	{
 	  std::cout << "------------------Too low level------------------" << std::endl;
-	  ShrubberyCreationForm f("Roppongi shrubbery plan", true);
+	  ShrubberyCreationForm f("home");
 	  Bureaucrat b("Bob", 145);
+	  b.SignForm(f);
 	  b.ExecuteForm(f);
 	}
   }
@@ -210,20 +213,23 @@ int main() {
 	std::cout << "==================RobotomyRequestForm==================" << std::endl;
 	{
 	  std::cout << "------------------Normal------------------" << std::endl;
-	  RobotomyRequestForm f("Robotomy request", true);
+	  RobotomyRequestForm f("John");
+	  std::cout << f << std::endl;
 	  Bureaucrat b("Bob", 1);
+	  b.SignForm(f);
 	  b.ExecuteForm(f);
 	}
 	{
 	  std::cout << "------------------Not signed yet------------------" << std::endl;
-	  RobotomyRequestForm f("Robotomy request", false);
+	  RobotomyRequestForm f("John");
 	  Bureaucrat b("Bob", 1);
 	  b.ExecuteForm(f);
 	}
 	{
 	  std::cout << "------------------Too low level------------------" << std::endl;
-	  RobotomyRequestForm f("Robotomy request", true);
-	  Bureaucrat b("Bob", 145);
+	  RobotomyRequestForm f("John");
+	  Bureaucrat b("Bob", 72);
+	  b.SignForm(f);
 	  b.ExecuteForm(f);
 	}
   }

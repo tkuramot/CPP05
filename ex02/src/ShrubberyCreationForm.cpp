@@ -14,15 +14,18 @@
 // Created by k.t. on 2023/12/04.
 //
 
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &name,
-											 bool is_signed) : AForm(name,
-																	 is_signed,
-																	 145,
-																	 137) {}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
+	: AForm("ShrubberyCreationForm",
+			false,
+			145,
+			137) {
+  target_ = target;
+}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &obj) : AForm(obj) {}
 
@@ -36,7 +39,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 void ShrubberyCreationForm::Execute(Bureaucrat const &executor) const
 throw(AForm::GradeTooLowException, AForm::NotSignedYet, std::ios_base::failure) {
   AForm::IsExecutable(executor);
-  std::ofstream shrubbery_file(executor.GetName() + "_shrubbery");
+  std::ofstream shrubbery_file(target_ + "_shrubbery");
   shrubbery_file.exceptions(std::ofstream::badbit | std::ofstream::failbit);
   shrubbery_file << "      ccee88oo" << std::endl
 				 << "   C8O8O8Q8PoOb o8oo" << std::endl

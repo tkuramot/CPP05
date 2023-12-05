@@ -57,6 +57,8 @@ class AForm {
   bool is_signed_;
   const int kRequiredGradeToSign;
   const int kRequiredGradeToExecute;
+ protected:
+  std::string target_;
 };
 
 std::ostream &operator<<(std::ostream &os, AForm &form);

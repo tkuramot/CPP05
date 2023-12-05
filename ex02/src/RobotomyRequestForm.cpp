@@ -17,11 +17,13 @@
 #include "Bureaucrat.hpp"
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &name, bool is_signed)
-	: AForm(name,
-			is_signed,
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
+	: AForm("RobotomyRequestForm",
+			false,
 			72,
-			45) {}
+			45) {
+  target_ = target;
+}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &obj) : AForm(obj) {}
 
@@ -38,8 +40,8 @@ throw(AForm::GradeTooLowException, AForm::NotSignedYet) {
   std::cout << "Buzzzzz... Whirrrr... Zzzzzz..." << std::endl;
   std::srand(std::time(NULL));
   if (std::rand() % 2) {
-	std::cout << executor.GetName() << " was successfully robotomized!" << std::endl;
+	std::cout << target_ << " was successfully robotomized!" << std::endl;
   } else {
-	std::cout << "Failed to robotomize " << executor.GetName() << "..." << std::endl;
+	std::cout << "Failed to robotomize " << target_ << "..." << std::endl;
   }
 }

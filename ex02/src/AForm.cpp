@@ -59,9 +59,11 @@ AForm &AForm::operator=(const AForm &obj) {
   is_signed_ = obj.is_signed_;
   return *this;
 }
+
 const std::string &AForm::GetName() const {
   return kName;
 }
+
 bool AForm::IsSigned() const {
   return is_signed_;
 }
@@ -91,7 +93,7 @@ void AForm::BeSigned(Bureaucrat const &bureaucrat) throw(AForm::GradeTooLowExcep
 }
 
 std::ostream &operator<<(std::ostream &os, AForm &form) {
-  os << "AForm title is " << form.GetName() << " which requires grade " << form.GetRequiredGradeToSign()
+  os << "This form, " << form.GetName() << " requires grade " << form.GetRequiredGradeToSign()
 	 << " to sign and grade " << form.GetRequiredGradeToExecute() << " to execute. This form is "
 	 << (form.IsSigned() ? "signed." : "not signed.");
   return os;
