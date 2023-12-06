@@ -30,10 +30,10 @@ const char *Form::NotSignedYet::what() const throw() {
 }
 
 Form::Form(
-    const std::string &name, bool is_signed, const int required_grade_to_sign,
+    const std::string &name, const int required_grade_to_sign,
     const int required_grade_to_execute) throw(Form::GradeTooHighException,
                                                Form::GradeTooLowException)
-    : kName(name), is_signed_(is_signed),
+    : kName(name), is_signed_(false),
       kRequiredGradeToSign(required_grade_to_sign),
       kRequiredGradeToExecute(required_grade_to_execute) {
   if (kRequiredGradeToSign < Bureaucrat::kHighestGrade ||

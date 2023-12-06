@@ -36,8 +36,7 @@ public:
     virtual const char *what() const throw();
   };
 
-  Form(const std::string &name, bool is_signed,
-       const int required_grade_to_sign,
+  Form(const std::string &name, const int required_grade_to_sign,
        const int required_grade_to_execute) throw(GradeTooHighException,
                                                   GradeTooLowException);
   Form(const Form &obj);

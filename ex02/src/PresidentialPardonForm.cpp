@@ -18,7 +18,7 @@
 #include "Form.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string &target)
-    : Form("PresidentialPardonForm", false, 25, 5) {
+    : Form("PresidentialPardonForm", 25, 5) {
   target_ = target;
 }
 

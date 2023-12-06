@@ -18,7 +18,7 @@
 #include "Bureaucrat.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
-    : Form("RobotomyRequestForm", false, 72, 45) {
+    : Form("RobotomyRequestForm", 72, 45) {
   target_ = target;
 }
 

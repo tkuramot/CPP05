@@ -85,8 +85,8 @@ void Bureaucrat::SignForm(Form &form) const {
 
 void Bureaucrat::ExecuteForm(Form const &form) {
   try {
-    std::cout << kName << " executed " << form.GetName() << "." << std::endl;
     form.Execute(*this);
+    std::cout << kName << " executed " << form.GetName() << "." << std::endl;
   } catch (Form::GradeTooLowException &e) {
     std::cout << kName << "'s grade was too low to execute " << form.GetName()
               << "." << std::endl;

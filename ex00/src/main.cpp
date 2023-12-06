@@ -104,6 +104,18 @@ int main() {
         std::cout << e.what() << std::endl;
       }
     }
+    {
+      std::cout << "------------------Failure in constructor------------------"
+                << std::endl;
+      Bureaucrat *b;
+      try {
+        b = new Bureaucrat("Bob", 151);
+        std::cout << b << std::endl;
+      } catch (Bureaucrat::GradeTooLowException &e) {
+        std::cout << e.what() << std::endl;
+        std::cout << b << std::endl;
+      }
+    }
   }
   return 0;
 }

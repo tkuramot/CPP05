@@ -20,7 +20,7 @@
 #include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
-    : Form("ShrubberyCreationForm", false, 145, 137) {
+    : Form("ShrubberyCreationForm", 145, 137) {
   target_ = target;
 }
 

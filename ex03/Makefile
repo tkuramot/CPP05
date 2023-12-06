@@ -11,7 +11,6 @@ SRCS		:= \
 	src/ShrubberyCreationForm.cpp \
 	src/Bureaucrat.cpp \
 	src/PresidentialPardonForm.cpp \
-	src/Intern.cpp \
 	src/main.cpp
 OBJDIR		:= objs
 OBJS		:= $(subst $(SRCDIR), $(OBJDIR), $(SRCS:.cpp=.o))
