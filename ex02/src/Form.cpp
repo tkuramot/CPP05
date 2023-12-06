@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.cpp                                          :+:      :+:    :+:   */
+/*   Form.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,84 +15,84 @@
 //
 
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
+#include "Form.hpp"
 
-const char *AForm::GradeTooHighException::what() const throw() {
+const char *Form::GradeTooHighException::what() const throw() {
   return "Grade must be lower than or equal to 1";
 }
 
-const char *AForm::GradeTooLowException::what() const throw() {
+const char *Form::GradeTooLowException::what() const throw() {
   return "Grade must be higher than or equal to 150";
 }
 
-const char *AForm::NotSignedYet::what() const throw() {
+const char *Form::NotSignedYet::what() const throw() {
   return "This form is not signed";
 }
 
-AForm::AForm(const std::string &name,
-			 bool is_signed,
-			 const int required_grade_to_sign,
-			 const int required_grade_to_execute) throw(AForm::GradeTooHighException, AForm::GradeTooLowException)
+Form::Form(const std::string &name,
+		   bool is_signed,
+		   const int required_grade_to_sign,
+		   const int required_grade_to_execute) throw(Form::GradeTooHighException, Form::GradeTooLowException)
 	: kName(name),
 	  is_signed_(is_signed),
 	  kRequiredGradeToSign(required_grade_to_sign),
 	  kRequiredGradeToExecute(required_grade_to_execute) {
   if (kRequiredGradeToSign < Bureaucrat::kHighestGrade || kRequiredGradeToExecute < Bureaucrat::kHighestGrade) {
-	throw AForm::GradeTooHighException();
+	throw Form::GradeTooHighException();
   }
   if (kRequiredGradeToSign > Bureaucrat::kLowestGrade || kRequiredGradeToExecute > Bureaucrat::kLowestGrade) {
-	throw AForm::GradeTooLowException();
+	throw Form::GradeTooLowException();
   }
 }
 
-AForm::AForm(const AForm &obj)
+Form::Form(const Form &obj)
 	: kName(obj.kName),
 	  is_signed_(obj.is_signed_),
 	  kRequiredGradeToSign(obj.kRequiredGradeToSign),
 	  kRequiredGradeToExecute(obj.kRequiredGradeToExecute) {
 }
 
-AForm::~AForm() {
+Form::~Form() {
 }
 
-AForm &AForm::operator=(const AForm &obj) {
+Form &Form::operator=(const Form &obj) {
   is_signed_ = obj.is_signed_;
   return *this;
 }
 
-const std::string &AForm::GetName() const {
+const std::string &Form::GetName() const {
   return kName;
 }
 
-bool AForm::IsSigned() const {
+bool Form::IsSigned() const {
   return is_signed_;
 }
 
-int AForm::GetRequiredGradeToSign() const throw(AForm::GradeTooHighException, AForm::GradeTooLowException) {
+int Form::GetRequiredGradeToSign() const throw(Form::GradeTooHighException, Form::GradeTooLowException) {
   return kRequiredGradeToSign;
 }
 
-int AForm::GetRequiredGradeToExecute() const throw(AForm::GradeTooHighException, AForm::GradeTooLowException) {
+int Form::GetRequiredGradeToExecute() const throw(Form::GradeTooHighException, Form::GradeTooLowException) {
   return kRequiredGradeToExecute;
 }
 
-void AForm::IsExecutable(Bureaucrat const &executor) const throw(AForm::GradeTooLowException, AForm::NotSignedYet) {
+void Form::IsExecutable(Bureaucrat const &executor) const throw(Form::GradeTooLowException, Form::NotSignedYet) {
   if (!is_signed_) {
-	throw AForm::NotSignedYet();
+	throw Form::NotSignedYet();
   }
   if (executor.GetGrade() > kRequiredGradeToExecute) {
-	throw AForm::GradeTooLowException();
+	throw Form::GradeTooLowException();
   }
 }
 
-void AForm::BeSigned(Bureaucrat const &bureaucrat) throw(AForm::GradeTooLowException) {
+void Form::BeSigned(Bureaucrat const &bureaucrat) throw(Form::GradeTooLowException) {
   if (bureaucrat.GetGrade() > kRequiredGradeToSign) {
-	throw AForm::GradeTooLowException();
+	throw Form::GradeTooLowException();
   }
   is_signed_ = true;
 }
 
-std::ostream &operator<<(std::ostream &os, AForm &form) {
+std::ostream &operator<<(std::ostream &os, Form &form) {
   os << "This form, " << form.GetName() << " requires grade " << form.GetRequiredGradeToSign()
 	 << " to sign and grade " << form.GetRequiredGradeToExecute() << " to execute. This form is "
 	 << (form.IsSigned() ? "signed." : "not signed.");

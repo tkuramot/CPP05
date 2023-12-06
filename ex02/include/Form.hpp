@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.hpp                                           :+:      :+:    :+:   */
+/*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,7 +21,7 @@
 
 class Bureaucrat;
 
-class AForm {
+class Form {
  public:
   class GradeTooHighException : public std::exception {
    public:
@@ -36,21 +36,21 @@ class AForm {
 	virtual const char *what() const throw();
   };
 
-  AForm(const std::string &name,
-		bool is_signed,
-		const int required_grade_to_sign,
-		const int required_grade_to_execute) throw(GradeTooHighException, GradeTooLowException);
-  AForm(const AForm &obj);
-  virtual ~AForm();
-  AForm &operator=(const AForm &obj);
+  Form(const std::string &name,
+	   bool is_signed,
+	   const int required_grade_to_sign,
+	   const int required_grade_to_execute) throw(GradeTooHighException, GradeTooLowException);
+  Form(const Form &obj);
+  virtual ~Form();
+  Form &operator=(const Form &obj);
 
   const std::string &GetName() const;
   bool IsSigned() const;
   int GetRequiredGradeToSign() const throw(GradeTooHighException, GradeTooLowException);
   int GetRequiredGradeToExecute() const throw(GradeTooHighException, GradeTooLowException);
 
-  void BeSigned(Bureaucrat const &bureaucrat) throw(AForm::GradeTooLowException);
-  void IsExecutable(Bureaucrat const &executor) const throw(AForm::GradeTooLowException, AForm::NotSignedYet);
+  void BeSigned(Bureaucrat const &bureaucrat) throw(Form::GradeTooLowException);
+  void IsExecutable(Bureaucrat const &executor) const throw(Form::GradeTooLowException, Form::NotSignedYet);
   virtual void Execute(Bureaucrat const &executor) const throw(std::exception) = 0;
  private:
   const std::string kName;
@@ -61,6 +61,6 @@ class AForm {
   std::string target_;
 };
 
-std::ostream &operator<<(std::ostream &os, AForm &form);
+std::ostream &operator<<(std::ostream &os, Form &form);
 
 #endif //A_OUT_EX01_CMAKE_BUILD_DEBUG_FORM_HPP_
