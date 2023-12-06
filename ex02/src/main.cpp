@@ -103,7 +103,7 @@ int main() {
 //	  }
 //	}
 //	{
-//	  std::cout << "==================SignAForm==================" << std::endl;
+//	  std::cout << "==================SignForm==================" << std::endl;
 //	  {
 //		std::cout << "------------------Normal------------------" << std::endl;
 //		Form f("Construction plan", false, 20, 40);
