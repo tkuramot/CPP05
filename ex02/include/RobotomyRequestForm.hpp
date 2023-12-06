@@ -20,13 +20,14 @@
 #include "Form.hpp"
 
 class RobotomyRequestForm : public Form {
- public:
+public:
   RobotomyRequestForm(const std::string &target);
   RobotomyRequestForm(const RobotomyRequestForm &obj);
   ~RobotomyRequestForm();
   RobotomyRequestForm &operator=(const RobotomyRequestForm &obj);
 
-  void Execute(Bureaucrat const &executor) const throw(Form::GradeTooLowException, Form::NotSignedYet);
+  void Execute(Bureaucrat const &executor) const
+      throw(Form::GradeTooLowException, Form::NotSignedYet);
 };
 
-#endif //A_OUT_EX02_ROBOTOMYREQUESTFORM_HPP_
+#endif // A_OUT_EX02_ROBOTOMYREQUESTFORM_HPP_

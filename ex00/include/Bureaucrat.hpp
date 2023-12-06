@@ -20,17 +20,18 @@
 #include <string>
 
 class Bureaucrat {
- public:
+public:
   class GradeTooHighException : public std::exception {
-   public:
-	virtual const char *what() const throw();
+  public:
+    virtual const char *what() const throw();
   };
   class GradeTooLowException : public std::exception {
-   public:
-	virtual const char *what() const throw();
+  public:
+    virtual const char *what() const throw();
   };
 
-  Bureaucrat(const std::string &name, int grade) throw(GradeTooHighException, GradeTooLowException);
+  Bureaucrat(const std::string &name, int grade) throw(GradeTooHighException,
+                                                       GradeTooLowException);
   Bureaucrat(const Bureaucrat &obj);
   ~Bureaucrat();
   Bureaucrat &operator=(const Bureaucrat &obj);
@@ -39,7 +40,8 @@ class Bureaucrat {
   int GetGrade() const;
   void Promote(int grade_diff) throw(GradeTooHighException);
   void Demote(int grade_diff) throw(GradeTooLowException);
- private:
+
+private:
   const std::string kName;
   int grade_;
   static const int kHighestGrade = 1;
@@ -48,4 +50,4 @@ class Bureaucrat {
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
 
-#endif //A_OUT_EX00_BUREAUCRAT_HPP_
+#endif // A_OUT_EX00_BUREAUCRAT_HPP_

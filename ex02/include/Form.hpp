@@ -22,45 +22,51 @@
 class Bureaucrat;
 
 class Form {
- public:
+public:
   class GradeTooHighException : public std::exception {
-   public:
-	virtual const char *what() const throw();
+  public:
+    virtual const char *what() const throw();
   };
   class GradeTooLowException : public std::exception {
-   public:
-	virtual const char *what() const throw();
+  public:
+    virtual const char *what() const throw();
   };
   class NotSignedYet : public std::exception {
-   public:
-	virtual const char *what() const throw();
+  public:
+    virtual const char *what() const throw();
   };
 
-  Form(const std::string &name,
-	   bool is_signed,
-	   const int required_grade_to_sign,
-	   const int required_grade_to_execute) throw(GradeTooHighException, GradeTooLowException);
+  Form(const std::string &name, bool is_signed,
+       const int required_grade_to_sign,
+       const int required_grade_to_execute) throw(GradeTooHighException,
+                                                  GradeTooLowException);
   Form(const Form &obj);
   virtual ~Form();
   Form &operator=(const Form &obj);
 
   const std::string &GetName() const;
   bool IsSigned() const;
-  int GetRequiredGradeToSign() const throw(GradeTooHighException, GradeTooLowException);
-  int GetRequiredGradeToExecute() const throw(GradeTooHighException, GradeTooLowException);
+  int GetRequiredGradeToSign() const
+      throw(GradeTooHighException, GradeTooLowException);
+  int GetRequiredGradeToExecute() const
+      throw(GradeTooHighException, GradeTooLowException);
 
   void BeSigned(Bureaucrat const &bureaucrat) throw(Form::GradeTooLowException);
-  void IsExecutable(Bureaucrat const &executor) const throw(Form::GradeTooLowException, Form::NotSignedYet);
-  virtual void Execute(Bureaucrat const &executor) const throw(std::exception) = 0;
- private:
+  void IsExecutable(Bureaucrat const &executor) const
+      throw(Form::GradeTooLowException, Form::NotSignedYet);
+  virtual void Execute(Bureaucrat const &executor) const
+      throw(std::exception) = 0;
+
+private:
   const std::string kName;
   bool is_signed_;
   const int kRequiredGradeToSign;
   const int kRequiredGradeToExecute;
- protected:
+
+protected:
   std::string target_;
 };
 
 std::ostream &operator<<(std::ostream &os, Form &form);
 
-#endif //A_OUT_EX01_CMAKE_BUILD_DEBUG_FORM_HPP_
+#endif // A_OUT_EX01_CMAKE_BUILD_DEBUG_FORM_HPP_

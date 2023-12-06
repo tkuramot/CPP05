@@ -14,28 +14,28 @@
 // Created by k.t. on 2023/12/04.
 //
 
-#include "Form.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Form.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string &target)
-	: Form("PresidentialPardonForm",
-		   false,
-		   25,
-		   5) {
+    : Form("PresidentialPardonForm", false, 25, 5) {
   target_ = target;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &obj) : Form(obj) {}
+PresidentialPardonForm::PresidentialPardonForm(
+    const PresidentialPardonForm &obj)
+    : Form(obj) {}
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
 
-PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &obj) {
+PresidentialPardonForm &
+PresidentialPardonForm::operator=(const PresidentialPardonForm &obj) {
   Form::operator=(obj);
   return *this;
 }
 
 void PresidentialPardonForm::Execute(const Bureaucrat &bureaucrat) const
-throw(Form::GradeTooLowException, Form::NotSignedYet) {
+    throw(Form::GradeTooLowException, Form::NotSignedYet) {
   Form::IsExecutable(bureaucrat);
   std::cout << "Zaphod Beeblebrox pardoned " << target_ << std::endl;
 }

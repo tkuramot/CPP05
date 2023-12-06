@@ -8,14 +8,15 @@
 #include "Form.hpp"
 
 class ShrubberyCreationForm : public Form {
- public:
+public:
   ShrubberyCreationForm(const std::string &target);
   ShrubberyCreationForm(const ShrubberyCreationForm &obj);
   ~ShrubberyCreationForm();
   ShrubberyCreationForm &operator=(const ShrubberyCreationForm &obj);
 
   void Execute(Bureaucrat const &executor) const
-  throw(Form::GradeTooLowException, Form::NotSignedYet, std::ios_base::failure);
+      throw(Form::GradeTooLowException, Form::NotSignedYet,
+            std::ios_base::failure);
 };
 
-#endif //A_OUT_EX02_SHRUBBERYCREATIONFORM_HPP_
+#endif // A_OUT_EX02_SHRUBBERYCREATIONFORM_HPP_

@@ -22,17 +22,18 @@
 class Form;
 
 class Bureaucrat {
- public:
+public:
   class GradeTooHighException : public std::exception {
-   public:
-	virtual const char *what() const throw();
+  public:
+    virtual const char *what() const throw();
   };
   class GradeTooLowException : public std::exception {
-   public:
-	virtual const char *what() const throw();
+  public:
+    virtual const char *what() const throw();
   };
 
-  Bureaucrat(const std::string &name, int grade) throw(GradeTooHighException, GradeTooLowException);
+  Bureaucrat(const std::string &name, int grade) throw(GradeTooHighException,
+                                                       GradeTooLowException);
   Bureaucrat(const Bureaucrat &obj);
   ~Bureaucrat();
   Bureaucrat &operator=(const Bureaucrat &obj);
@@ -47,11 +48,12 @@ class Bureaucrat {
 
   static const int kHighestGrade = 1;
   static const int kLowestGrade = 150;
- private:
+
+private:
   const std::string kName;
   int grade_;
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
 
-#endif //A_OUT_EX00_BUREAUCRAT_HPP_
+#endif // A_OUT_EX00_BUREAUCRAT_HPP_

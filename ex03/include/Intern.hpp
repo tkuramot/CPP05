@@ -21,16 +21,16 @@
 #include <string>
 
 class Intern {
- public:
+public:
   Intern();
   Intern(const Intern &obj);
   ~Intern();
   Intern &operator=(const Intern &obj);
 
-  Form *MakeForm(std::string &form_name, std::string &target);
+  Form *MakeForm(std::string form_name, std::string target);
   static Form *MakeShrubberyCreationForm(const std::string &target);
   static Form *MakeRobotomyRequestForm(const std::string &target);
   static Form *MakePresidentialPardonForm(const std::string &target);
 };
 
-#endif //A_OUT_EX03_INTERN_HPP_
+#endif // A_OUT_EX03_INTERN_HPP_

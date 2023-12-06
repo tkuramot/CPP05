@@ -20,13 +20,14 @@
 #include "Form.hpp"
 
 class PresidentialPardonForm : public Form {
- public:
+public:
   PresidentialPardonForm(const std::string &target);
   PresidentialPardonForm(const PresidentialPardonForm &obj);
   ~PresidentialPardonForm();
   PresidentialPardonForm &operator=(const PresidentialPardonForm &obj);
 
-  void Execute(Bureaucrat const &bureaucrat) const throw(Form::GradeTooLowException, Form::NotSignedYet);
+  void Execute(Bureaucrat const &bureaucrat) const
+      throw(Form::GradeTooLowException, Form::NotSignedYet);
 };
 
-#endif //A_OUT_EX02_PRESIDENTIALPARDONFORM_HPP_
+#endif // A_OUT_EX02_PRESIDENTIALPARDONFORM_HPP_

@@ -26,49 +26,48 @@ const char *Bureaucrat::GradeTooLowException::what() const throw() {
 }
 
 Bureaucrat::Bureaucrat(const std::string &name,
-					   int grade) throw(Bureaucrat::GradeTooHighException, Bureaucrat::GradeTooLowException)
-	: kName(name), grade_(grade) {
+                       int grade) throw(Bureaucrat::GradeTooHighException,
+                                        Bureaucrat::GradeTooLowException)
+    : kName(name), grade_(grade) {
   if (grade_ < kHighestGrade) {
-	throw GradeTooHighException();
+    throw GradeTooHighException();
   } else if (grade_ > kLowestGrade) {
-	throw GradeTooLowException();
+    throw GradeTooLowException();
   }
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &obj) : kName(obj.kName), grade_(obj.grade_) {
-}
+Bureaucrat::Bureaucrat(const Bureaucrat &obj)
+    : kName(obj.kName), grade_(obj.grade_) {}
 
-Bureaucrat::~Bureaucrat() {
-}
+Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &obj) {
   grade_ = obj.grade_;
   return *this;
 }
 
-const std::string &Bureaucrat::GetName() const {
-  return kName;
-}
+const std::string &Bureaucrat::GetName() const { return kName; }
 
-int Bureaucrat::GetGrade() const {
-  return grade_;
-}
+int Bureaucrat::GetGrade() const { return grade_; }
 
-void Bureaucrat::Promote(int grade_diff) throw(Bureaucrat::GradeTooHighException) {
+void Bureaucrat::Promote(int grade_diff) throw(
+    Bureaucrat::GradeTooHighException) {
   if (grade_ - grade_diff < kHighestGrade) {
-	throw GradeTooHighException();
+    throw GradeTooHighException();
   }
   grade_ -= grade_diff;
 }
 
-void Bureaucrat::Demote(int grade_diff) throw(Bureaucrat::GradeTooLowException) {
+void Bureaucrat::Demote(int grade_diff) throw(
+    Bureaucrat::GradeTooLowException) {
   if (grade_ + grade_diff > kLowestGrade) {
-	throw GradeTooLowException();
+    throw GradeTooLowException();
   }
   grade_ += grade_diff;
 }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
-  os << bureaucrat.GetName() << ", bureaucrat grade " << bureaucrat.GetGrade() << ".";
+  os << bureaucrat.GetName() << ", bureaucrat grade " << bureaucrat.GetGrade()
+     << ".";
   return os;
 }

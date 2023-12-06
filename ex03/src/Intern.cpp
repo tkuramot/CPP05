@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:14:09 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/12/05 18:14:09 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/12/06 10:21:33 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,27 @@
 
 Intern::Intern() {}
 
-Intern::Intern(const Intern &obj) {}
+Intern::Intern(const Intern &obj) { (void)obj; }
 
 Intern::~Intern() {}
 
 Intern &Intern::operator=(const Intern &obj) {
+  (void)obj;
   return *this;
 }
 
-Form *Intern::MakeForm(std::string &form_name, std::string &target) {
+Form *Intern::MakeForm(std::string form_name, std::string target) {
   const int kNumberOfForms = 3;
-  std::string form_names[kNumberOfForms] = {"shrubbery creation", "robotomy request", "presidensial pardon"};
+  std::string form_names[kNumberOfForms] = {
+      "shrubbery creation", "robotomy request", "presidential pardon"};
   Form *(*form_templates[kNumberOfForms])(const std::string &) = {
-	  &Intern::MakeShrubberyCreationForm,
-	  &Intern::MakeRobotomyRequestForm,
-	  &Intern::MakePresidentialPardonForm
-  };
+      &Intern::MakeShrubberyCreationForm, &Intern::MakeRobotomyRequestForm,
+      &Intern::MakePresidentialPardonForm};
   for (int i = 0; i < kNumberOfForms; ++i) {
-	if (form_name == form_names[i]) {
-	  std::cout << "Intern creates " << form_names[i] << std::endl;
-	  return (*form_templates[i])(target);
-	}
+    if (form_name == form_names[i]) {
+      std::cout << "Intern creates " << form_names[i] << std::endl;
+      return (*form_templates[i])(target);
+    }
   }
   std::cout << "Intern couldn't create the form, " << form_name << std::endl;
   return NULL;
